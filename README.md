@@ -65,8 +65,7 @@ open "/Applications/Ollama AI.app"
 npx electron-packager . "Ollama AI" --platform=win32 --arch=x64 --overwrite
 
 # A folder called "Ollama AI-win32-x64" will be created
-# Zip it and send to Windows user, or just run directly:
-# Open "Ollama AI-win32-x64/Ollama AI.exe"
+# Run: "Ollama AI-win32-x64/Ollama AI.exe"
 ```
 > **Note:** If the build times out downloading Electron, try using a mirror:
 > ```bash
@@ -87,14 +86,52 @@ chmod +x "Ollama AI"
 ---
 
 ## Recommended Models
-Pull any of these with Ollama before launching the app:
+> ✅ Personally tested on MacBook Air M1 8GB
 
-| Model | Use case | RAM needed |
-|-------|----------|------------|
-| `ollama pull llama3` | General chat | ~5GB |
-| `ollama pull mistral` | Fast general chat | ~4GB |
-| `ollama pull llava-phi3` | Image understanding | ~3GB |
-| `ollama pull moondream` | Lightweight image model | ~2GB |
+```bash
+ollama pull llava-phi3       # Image understanding
+ollama pull deepseek-coder:1.3b  # Lightweight code assistant
+ollama pull qwen2.5-coder:3b     # Advanced code completion
+ollama pull llama3.2         # General chat & writing
+```
+
+| Model | Use case | RAM | Speed |
+|-------|----------|-----|-------|
+| `llava-phi3` | Image analysis, reading screenshots | ~3GB | Fast |
+| `deepseek-coder:1.3b` | Quick code help, completions | ~1GB | Very fast |
+| `qwen2.5-coder:3b` | Complex code, debugging | ~2GB | Fast |
+| `llama3.2` | General chat, writing, Q&A | ~2GB | Fast |
+
+---
+
+## Tips for M1 8GB Users
+
+macOS, CPU, GPU and RAM all share the same 8GB pool — so managing memory matters.
+
+**1. Run one model at a time**
+Each model loads into RAM when first used and stays there until unloaded.
+Use the red **TERMINATE MODEL** button in the sidebar to free RAM before switching.
+
+**2. Unload when done**
+Ollama keeps models in memory for 5 minutes by default after your last message.
+Click **TERMINATE MODEL** in the sidebar to instantly free that RAM.
+
+**3. Best combos that fit in 8GB**
+- `deepseek-coder:1.3b` + `llava-phi3` — code + vision, very comfortable
+- `qwen2.5-coder:3b` + `llava-phi3` — better code + vision, tight but works
+- `llama3.2` alone — leave headroom for macOS and other apps
+
+**4. Close other apps**
+Chrome, Slack, and other heavy apps eat into your unified memory.
+Close them before running larger models like `qwen2.5-coder:3b`.
+
+**5. Watch for slowdowns**
+If responses suddenly get very slow, macOS is likely swapping to disk.
+Unload the current model and try a smaller one.
+
+**6. For image tasks**
+Always use `llava-phi3` — it's the best vision model that comfortably fits in 8GB.
+Unload your chat model first before sending images for best performance.
 
 ---
 
