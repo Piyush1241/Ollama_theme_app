@@ -5,3 +5,4 @@ Ollama AI-win32-x64/
 *.icns
 *.ico
 icon.iconset/
+.DS_Store
