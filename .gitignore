@@ -1,0 +1,7 @@
+node_modules/
+Ollama-darwin-arm64/
+Ollama AI-darwin-arm64/
+Ollama AI-win32-x64/
+*.icns
+*.ico
+icon.iconset/
